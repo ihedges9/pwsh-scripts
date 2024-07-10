@@ -8,7 +8,7 @@
 gci "C:\Users" | ? { $_.Name -like "UIPath*bot*" } | ForEach-Object {
     $paths = @("C:\Users\$_\.nuget\packages\uipath", "C:\Users\$_\.nuget\packages\uipath.system.activities", "C:\Users\$_\.nuget\packages\uipath.uiautomation.activities")
     ForEach ( $path in $paths ) {
-        Get-ChildItem $path -File | 
+        gci $path -File | 
                 # Sort them from Newest to Oldest
                 Sort-Object CreationTime -Descending |
                 # Skip the first two (the newest)
