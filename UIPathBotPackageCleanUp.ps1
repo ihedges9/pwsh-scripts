@@ -20,17 +20,3 @@ ForEach ( $user in $users ) {
                 Remove-Item -Force -WhatIf
     }
 }
-
-
-gci "C:\Users" | ? { $_.Name -like "testuser*bot*" } | ForEach-Object {
-    $paths = @("C:\Users\$_\.nuget\packages\uipath", "C:\Users\$_\.nuget\packages\uipath.system.activities", "C:\Users\$_\.nuget\packages\uipath.uiautomation.activities")
-    ForEach ( $path in $paths ) {
-        Get-ChildItem $path -File | 
-                # Sort them from Newest to Oldest
-                Sort-Object CreationTime -Descending |
-                # Skip the first two (the newest)
-                Select-Object -Skip 2 |
-                # Remove the rest
-                Remove-Item -Force -WhatIf
-    }
-}
